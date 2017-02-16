@@ -15,7 +15,7 @@ resource "aws_instance" "web-app" {
   # Our Security group to allow HTTP and SSH access
   vpc_security_group_ids = ["${aws_security_group.instance-sg.id}"]
   subnet_id              = "${aws_subnet.subnet-1a-public.id}"
-  # user_data              = "${file("userdata.sh")}"
+  user_data              = "${file("userdata.sh")}"
 
   #Instance tags
 
