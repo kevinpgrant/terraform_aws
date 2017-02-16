@@ -6,7 +6,6 @@ provider "aws" {
 
 variable "enable_dns_hostnames" { default = "true" }
 variable "enable_dns_support" { default = "true" }
-variable "ip_range" { default = "172.37.0.0/16" }
 
 variable "region" { default = "eu-west-1" }
 
@@ -22,12 +21,50 @@ variable "aws_amis" {
   }
 }
 
+variable "vpc_cidr" {
+	default = "172.37.0.0/16"
+}
 
+variable "db_name" {
+  default = "mydb1"
+}
 
+variable "db_username" {
+  default = "testuser"
+}
 
+variable "db_password" {
+  default = "testpassword"
+}
 
+variable "engine_version" {
+  description = "Engine version"
 
+  default = {
+    mysql    = "5.6.22"
+    postgres = "9.4.1"
+  }
+}
 
+variable "storage" {
+  default     = "10"
+  description = "Storage size in GB"
+}
+
+variable "engine" {
+  description = "Engine type, example values mysql, postgres"
+  default     = "mysql"
+}
+
+variable "identifier" {
+  default     = "mydb-rds"
+  description = "Identifier for your DB"
+}
+
+variable "instance_class" {
+  default     = "db.t2.micro"
+  description = "Instance class"
+}
 
 # variable "tf_s3_bucket" { default = "hound-terraform-state" }
 # variable "master_state_file" { default = "base.tfstate" }

@@ -45,3 +45,4 @@ resource "aws_subnet" "subnet-1b-private-with-nat" {
         Terraform = "true"
     }
 }
+
