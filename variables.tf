@@ -10,7 +10,17 @@ variable "ip_range" { default = "172.37.0.0/16" }
 
 variable "region" { default = "eu-west-1" }
 
+variable "key_name" {
+    default = "example-keypair"
+    description = "the name of the key file"
+}
 
+# ubuntu-16.04 ebs ssd (x64)
+variable "aws_amis" {
+  default = {
+    "eu-west-1" = "ami-d8f4deab"
+  }
+}
 
 
 
@@ -27,5 +37,4 @@ variable "region" { default = "eu-west-1" }
 # variable "dev_state_file" { default = "dev.tfstate" }
 
 # variable "azs" { default = "us-east-1a,us-east-1b,us-east-1d,us-east-1e" }
-# variable "key_name" { default = "charity-keypair" }
 # variable "acct_number" { default = "702835727665" } # needed for peering
