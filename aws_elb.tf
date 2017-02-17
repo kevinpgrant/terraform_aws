@@ -1,4 +1,3 @@
-
 resource "aws_elb" "web-app-elb" {
   name = "web-app-elb-w00t"
 

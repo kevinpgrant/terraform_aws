@@ -23,7 +23,7 @@ resource "aws_subnet" "subnets-private" {
     cidr_block              = "${element(split(",", var.private_ranges), count.index)}"
     availability_zone       = "${element(split(",", var.azs), count.index)}"
 
-    map_public_ip_on_launch = true
+    map_public_ip_on_launch = false
 
     tags {
         Name = "w00t"

@@ -11,3 +11,16 @@ resource "aws_route_table" "rtb-main" {
         Terraform = "true"
     }
 }
+
+
+# for each of the private ranges, create a "private" route table.
+resource "aws_route_table" "private" {
+  vpc_id = "${aws_vpc.main.id}"
+  count = "${length(compact(split(",", var.private_ranges)))}"
+  
+  tags { 
+    Name = "w00t"
+    Terraform = "true"
+    w00t = "private_subnet_route_table_${count.index}"
+  }
+}

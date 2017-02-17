@@ -8,6 +8,6 @@ resource "aws_route_table_association" "rta-pub" {
 resource "aws_route_table_association" "rta-priv" {
     count = "${length(compact(split(",", var.private_ranges)))}"
 
-    route_table_id = "${aws_route_table.rtb-main.id}"
+    route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
     subnet_id = "${element(aws_subnet.subnets-private.*.id, count.index)}"
 }
