@@ -1,8 +1,5 @@
 ### these variables should be the same across all environments
 # your aws secret key and access key should be in your env variables
-provider "aws" {
-    region = "eu-west-1"
-}
 
 variable "enable_dns_hostnames" { default = "true" }
 variable "enable_dns_support" { default = "true" }
@@ -19,6 +16,14 @@ variable "aws_amis" {
   default = {
     "eu-west-1" = "ami-d8f4deab"
   }
+}
+
+variable "current_profile" {
+	default = "default"
+}
+
+variable "shared_creds_file" {
+  default = "/Users/nevyn/.aws/credentials"
 }
 
 variable "vpc_cidr" {
