@@ -4,7 +4,13 @@
 variable "enable_dns_hostnames" { default = "true" }
 variable "enable_dns_support" { default = "true" }
 
-variable "region" { default = "eu-west-1" }
+variable "region" {
+  default = "eu-west-1"
+}
+
+variable "azs" {
+  default = "eu-west-1a,eu-west-1b"
+}
 
 variable "key_name" {
     default = "example-keypair"
@@ -28,6 +34,14 @@ variable "shared_creds_file" {
 
 variable "vpc_cidr" {
 	default = "172.37.0.0/16"
+}
+
+variable "public_ranges" {
+  default = "172.37.0.0/20,172.37.128.0/20"
+}
+
+variable "private_ranges" {
+  default = "172.37.16.0/20,172.37.144.0/20"
 }
 
 variable "db_name" {
@@ -78,5 +92,4 @@ variable "instance_class" {
 # variable "dogfood_state_file" { default = "dogfood.tfstate" }
 # variable "dev_state_file" { default = "dev.tfstate" }
 
-# variable "azs" { default = "us-east-1a,us-east-1b,us-east-1d,us-east-1e" }
 # variable "acct_number" { default = "702835727665" } # needed for peering

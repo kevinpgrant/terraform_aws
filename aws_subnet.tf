@@ -1,48 +1,34 @@
-resource "aws_subnet" "subnet-1a-public" {
+resource "aws_subnet" "subnets-public" {
+
+    count = "${length(compact(split(",", var.public_ranges)))}"
+
     vpc_id                  = "${aws_vpc.main.id}"
-    cidr_block              = "172.37.0.0/20"
-    availability_zone       = "eu-west-1a"
+    cidr_block              = "${element(split(",", var.public_ranges), count.index)}"
+    availability_zone       = "${element(split(",", var.azs), count.index)}"
+
     map_public_ip_on_launch = true
 
     tags {
         Name = "w00t"
         Terraform = "true"
+        w00t = "public_${count.index}"
     }
 }
 
-resource "aws_subnet" "subnet-1a-private-with-nat" {
-    vpc_id                  = "${aws_vpc.main.id}"
-    cidr_block              = "172.37.16.0/20"
-    availability_zone       = "eu-west-1a"
-    map_public_ip_on_launch = false
+resource "aws_subnet" "subnets-private" {
 
-    tags {
-        Name = "w00t"
-        Terraform = "true"
-    }
-}
+    count = "${length(compact(split(",", var.private_ranges)))}"
 
-resource "aws_subnet" "subnet-1b-public" {
     vpc_id                  = "${aws_vpc.main.id}"
-    cidr_block              = "172.37.128.0/20"
-    availability_zone       = "eu-west-1b"
+    cidr_block              = "${element(split(",", var.private_ranges), count.index)}"
+    availability_zone       = "${element(split(",", var.azs), count.index)}"
+
     map_public_ip_on_launch = true
 
     tags {
         Name = "w00t"
         Terraform = "true"
-    }
-}
-
-resource "aws_subnet" "subnet-1b-private-with-nat" {
-    vpc_id                  = "${aws_vpc.main.id}"
-    cidr_block              = "172.37.144.0/20"
-    availability_zone       = "eu-west-1b"
-    map_public_ip_on_launch = false
-
-    tags {
-        Name = "w00t"
-        Terraform = "true"
+        w00t = "private_${count.index}"
     }
 }
 

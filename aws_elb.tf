@@ -3,7 +3,7 @@ resource "aws_elb" "web-app-elb" {
   name = "web-app-elb-w00t"
 
   # The same availability zone as our instance
-  subnets = ["${aws_subnet.subnet-1a-public.id}","${aws_subnet.subnet-1b-public.id}"]
+  subnets = ["${aws_subnet.subnets-public.*.id}"]
 
   security_groups = ["${aws_security_group.elb-sg.id}"]
 
