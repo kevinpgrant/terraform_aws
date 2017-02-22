@@ -1,8 +1,13 @@
 ### these variables should be the same across all environments
 # your aws secret key and access key should be in your env variables
 
-variable "enable_dns_hostnames" { default = "true" }
-variable "enable_dns_support" { default = "true" }
+variable "enable_dns_hostnames" {
+  default = "true"
+}
+
+variable "enable_dns_support" {
+  default = "true"
+}
 
 variable "region" {
   default = "eu-west-1"
@@ -13,8 +18,8 @@ variable "azs" {
 }
 
 variable "key_name" {
-    default = "example-keypair"
-    description = "the name of the key file"
+  default     = "example-keypair"
+  description = "the name of the key file"
 }
 
 # ubuntu-16.04 ebs ssd (x64)
@@ -29,7 +34,7 @@ variable "current_profile" {
 }
 
 variable "shared_creds_file" {
-  default = "/Users/nevyn/.aws/credentials"
+  default = "$HOME/.aws/credentials"
 }
 
 variable "vpc_cidr" {
@@ -83,4 +88,20 @@ variable "identifier" {
 variable "instance_class" {
   default     = "db.t2.micro"
   description = "Instance class"
+}
+
+variable "hosted_zone_id" {
+  # CHANGEME
+  default = "ZZZZZONEID"
+}
+
+variable "domain_name" {
+  # CHANGEME
+  default = "example.com"
+}
+
+variable "account_id" {
+  # CHANGEME
+  # currenly only used by output.tf - account_id actually set in  bastion.tf
+  default = "x123456789012x"
 }

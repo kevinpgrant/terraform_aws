@@ -28,9 +28,8 @@ resource "aws_elb" "web-app-elb" {
   idle_timeout                = 400
   connection_draining         = true
   connection_draining_timeout = 400
-
-    tags {
-        Name = "w00t"
-        Terraform = "true"
-    }
+  tags {
+    Name      = "w00t"
+    Terraform = "true"
+  }
 }

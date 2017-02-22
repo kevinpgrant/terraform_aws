@@ -19,7 +19,7 @@ resource "aws_instance" "web-app" {
 
   #Instance tags
   tags {
-    Name = "w00t"
+    Name      = "w00t"
     Terraform = "true"
   }
 }
@@ -45,7 +45,7 @@ resource "aws_instance" "dumb-app" {
 
   #Instance tags
   tags {
-    Name = "w00t"
+    Name      = "w00t"
     Terraform = "true"
   }
 }
