@@ -25,7 +25,7 @@ variable "aws_amis" {
 }
 
 variable "current_profile" {
-	default = "default"
+  default = "default"
 }
 
 variable "shared_creds_file" {
@@ -33,7 +33,7 @@ variable "shared_creds_file" {
 }
 
 variable "vpc_cidr" {
-	default = "172.37.0.0/16"
+  default = "172.37.0.0/16"
 }
 
 variable "public_ranges" {
@@ -84,12 +84,3 @@ variable "instance_class" {
   default     = "db.t2.micro"
   description = "Instance class"
 }
-
-# variable "tf_s3_bucket" { default = "hound-terraform-state" }
-# variable "master_state_file" { default = "base.tfstate" }
-# variable "prod_state_file" { default = "production.tfstate" } # TODO: make init.sh use these variables
-# variable "staging_state_file" { default = "staging.tfstate" }
-# variable "dogfood_state_file" { default = "dogfood.tfstate" }
-# variable "dev_state_file" { default = "dev.tfstate" }
-
-# variable "acct_number" { default = "702835727665" } # needed for peering
