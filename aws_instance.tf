@@ -13,7 +13,7 @@ resource "aws_instance" "web-app" {
   key_name = "${var.key_name}"
 
   # Our Security group to allow HTTP and SSH access
-  security_groups        = ["${aws_security_group.instance-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.instance-sg.id}"]
   subnet_id              = "${aws_subnet.subnets-public.0.id}"
   user_data              = "${file("userdata.sh")}"
 
@@ -39,7 +39,7 @@ resource "aws_instance" "dumb-app" {
   key_name = "${var.key_name}"
 
   # Our Security group to allow HTTP and SSH access
-  security_groups        = ["${aws_security_group.instance-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.instance-sg.id}"]
   subnet_id              = "${aws_subnet.subnets-private.0.id}"
   user_data              = "${file("userdata.sh")}"
 
