@@ -22,6 +22,11 @@ variable "key_name" {
   description = "the name of the key file"
 }
 
+
+variable "key_path" {
+  default = "~/.ssh/example-keypair.pem"
+}
+
 # ubuntu-16.04 ebs ssd (x64)
 variable "aws_amis" {
   default = {
