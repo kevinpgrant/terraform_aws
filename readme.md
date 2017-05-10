@@ -28,9 +28,7 @@ Added a Modules folder, and added a bastion host, using a community provided mod
 
 A few formatting changes and updates for terraform 0.9.x compatibility
 
-Known issues
 
-- The bastion module brings up an instance in an ASG. Theres also an EIP. I seem to have to manually attach the EIP to the instance for it to function, otherwise the host has a different external IP and the DNS does not resolve until I do so, replacing the other IP. Also, not sure if the SSH user is able to login straight away, or if it takes 15 mins or so for the keys to propagate - destroying the instance brings up a new one which may work immediately, but you have to re-reattach the EIP if you do so
 
 
 
@@ -43,12 +41,15 @@ Known issues
 - https://charity.wtf/2016/04/14/scrapbag-of-useful-terraform-tips/
 - https://www.terraform.io/docs/configuration/interpolation.html
 - https://www.terraform.io/docs/providers/aws/index.html
-
+- https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9
+- http://blog.lusis.org/blog/2015/10/12/terraform-modules-for-fun-and-profit/
 
 A few ideas on how to separate your different environments...
 
 - spin up a production VPC, a staging VPC, dev VPC, Travis-CI VPC, ...
+
 - set up one aws account per env, use consolidated billing - see https://segment.com/blog/rebuilding-our-infrastructure/
+
 - one vpc, using separate subnets and security groups to keep things apart
 
 

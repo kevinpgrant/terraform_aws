@@ -5,6 +5,7 @@ variable "aws_account" {}
 variable "aws_region" {
 	default = "eu-west-1"
 }
+variable "domain_name" {}
 variable "key_name" {}
 variable "key_path" {}
 variable "subnet_ids" {

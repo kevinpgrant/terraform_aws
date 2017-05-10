@@ -35,6 +35,7 @@ resource "aws_instance" "master" {
     user        = "ubuntu"
     private_key = "${file("${var.key_path}")}"
     agent       = false
+    bastion_host = "bastion.${var.domain_name}"
   }
 
   lifecycle {
@@ -95,6 +96,7 @@ resource "aws_instance" "slave" {
     user        = "ubuntu"
     private_key = "${file("${var.key_path}")}"
     agent       = false
+    bastion_host = "bastion.${var.domain_name}"
   }
 
   lifecycle {
