@@ -16,6 +16,11 @@ The IAM credentials should be setup similar to the following (use your own acces
   aws_secret_access_key = A1B2C3D4E5F6G7H8I9J0k1l2m3n4o5p6q7r8s9t0
 ```
 
+You will also need to make sure the account numbers in the bastion_s3_public_keys.tf policy are correct, or your bastion will not allow access.
+
+Do NOT commit your ssh keys, or AWS credentials!! (symlinks outside the folder work well, as git will ignore them but terraform won't)
+
+
 CHANGES:
 
 2017-05-10
@@ -29,8 +34,38 @@ Added a Modules folder, and added a bastion host, using a community provided mod
 A few formatting changes and updates for terraform 0.9.x compatibility
 
 
+NOTES
+
+Whilst there are a great number of examples of using terraform for setting up specific resources, it was not easy to come across something that quickly summarised how to approach TF for the first time, from the ground up - ironically, given it's purpose as a bootstrapping tool :D
+
+However I have included links to all the most useful resources that I read and re-read as I worked on my own code, until I felt I understood every dilemma and every decision made by the authors. I have summarised the learnings I got from this just below. 
 
 
+
+A good way to approach your own TF projects is to start by setting up your shared credentials / AWS profile (see AWS docs)
+
+* If you are working as a group, setup an S3 bucket for your remote shared state terraform.tfstate file(s)  and a dynamodb for your state lock (google is your friend)
+
+* Then setup your VPC, internet gateway and subnets (AWS scenario two is a good starting point, separating public and private resources)
+
+* Consider setting up your subnets across multiple availability zones
+
+* Your subnets will require a routing table, and a routing table association. (avoid using inline route blobs like I have done here if you can)
+
+* You will then want a Nat Gatway (This goes in the PUBLIC network, and the private network instances will use it as their route to the internet.)
+
+* You might want a VPN (if your location has the facilities) so you can setup a security group that allows you to go onto the private nodes without using a jump host / bastion
+
+* Alternatively, you can use a bastion host as in this example repo.
+
+* You can setup a database in RDS to keep state between your apps, elasticache, elastic search, etc etc
+
+* note the way I have used a module to group my resources for bastion, docker swarm mode, etc. do not use remote state inside a module, but instead rely on passing vars in and outputs back out.
+
+* You then can deploy a few ec2 instances and provision with Ansible or your config mgmt tool of preference, or setup a consul cluster and some elasticbeanstalk apps and go mental with docker containers! ;-)
+
+
+Sadly I haven't set up examples for the last couple of points, but once you get this far the examples on the internet should be all you need to get going!
 
 
 :sparkles: thanks to Kofi, Joe, Bobby and charity.wtf :sparkles: 
@@ -43,6 +78,9 @@ A few formatting changes and updates for terraform 0.9.x compatibility
 - https://www.terraform.io/docs/providers/aws/index.html
 - https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9
 - http://blog.lusis.org/blog/2015/10/12/terraform-modules-for-fun-and-profit/
+
+
+EXERCISES FOR THE READER:
 
 A few ideas on how to separate your different environments...
 
